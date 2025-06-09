@@ -1,0 +1,107 @@
+{% include 'judge_header.html' %}
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h3 class="card-header" style="color: #fd7e14">Case No {{request.GET.case_no}}  Details</h3>
+        <div class="card-body">
+           {% for i in row %}
+                <div class="row">
+                    <div class="col-md-5">
+                        <h3>Case No</h3>
+                       <h5>{{i.case_no}}</h5>
+                </div>
+                <div class="col-md-5">
+                        <h3>Case Type</h3>
+                       <h5>{{i.case_type}}</h5>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <h3>Victim Name</h3>
+                       <h5>{{i.victim_name}}</h5>
+                </div>
+                <div class="col-md-5">
+                        <h3>Suspect Name</h3>
+                       <h5>{{i.suspect_name}}</h5>
+                </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-5">
+                        <h3>Victim Gender</h3>
+                       <h5>{{i.victim_gender}}</h5>
+                </div>
+                <div class="col-md-5">
+                        <h3>Case Happen  Date</h3>
+                       <h5>{{i.case_date}}</h5>
+                </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-5">
+                        <h3>Case Filled Date</h3>
+                       <h5>{{i.case_filed_date}}</h5>
+                </div>
+                <div class="col-md-5">
+                        <h3>Case Location</h3>
+                       <h5>{{i.case_location}}</h5>
+                </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-5">
+                        <h3>Victim Address</h3>
+                       <h5>{{i.victim_address}}</h5>
+                </div>
+                <div class="col-md-5">
+                        <h3>Suspect Address</h3>
+                       <h5>{{i.suspect_address}}</h5>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <h3>FIR Document</h3>
+                       <a href="/media/{{i.fir_doc}}" class="btn btn-danger btn-xs">Download</a>
+                </div>
+                <div class="col-md-5">
+                        <h3>Evidance Document</h3>
+                       <a href="/media/{{i.evidance}}" class="btn btn-success btn-xs">Download</a>
+                </div>
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-md-5">
+                        <h3>Victim Photo</h3>
+                       <img src="/media/{{i.victim_photo}}"  style="width:150px;">
+                </div>
+                <div class="col-md-5">
+                        <h3>Suspect Photo</h3>
+                       <img src="/media/{{i.suspect_photo}}"  style="width:150px;">
+                </div>
+                </div><br>
+                {% endfor %}
+                <h3>Case Summary</h3>
+                <p>{{i.case_summary}}</p>
+
+                <h3 style="color:#fd7e14">Evidance Detail</h3>
+                {% for i in b %}
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-md-5">
+                        <h3>Lawyer Evidance</h3>
+                       <img src="/media/{{i.lawyer_evidance_doc}}"  style="width:150px;">
+                </div>
+                <div class="col-md-5">
+                        <h3>Other Document </h3>
+                       <a href="/media/{{i.other_doc}}" class="btn btn-primary btn-xs">Download</a>
+                </div>
+                </div><br>
+                <h3>Case Summary</h3>
+                <p>{{i.case_summary}}</p>
+
+            {% endfor %}
+            {% for i in  detail %}
+                <div class="col-md-5">
+                        <h3>More Evidance Submitted By Police</h3>
+                       <a href="/media/{{i.more_evidance_doc}}" class="btn btn-danger btn-xs">Download</a>
+                </div>
+            {% endfor %}
+        </div>
+            
+    </div>
+</div>
+{% include 'footer.html' %}

@@ -1,0 +1,71 @@
+{% include 'police_header.html' %}
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <form method="get">{% csrf_token %}
+        <div class="row" style="margin: 20px;">
+            <div class="col-md-5">
+                <input type="date" name="search" class="form-control" >
+            </div>
+            <div class="col-md-5">
+                <input type="submit" class="btn btn-warning">
+            </div>
+        </div>
+    </form>
+    <div class="card">
+        <h5 class="card-header">All Case Details</h5>
+        
+        <div class="card-body">
+            <div class="table-responsive ">
+                <table class="table table-bordered">
+                    <thead style="background: #ff407b;">
+                        <tr class="white">
+                            <th scope="col" >S.No</th>
+                            <th scope="col">Case No</th>
+                            <th scope="col">Case Type</th>
+                            
+                            <th scope="col">Case Happen Date</th>
+                            <th scope="col">Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if request.GET.search %}
+                            {% for i in detail %}
+                            <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td>{{i.case_no}}</td>
+                                <td>{{i.case_type}}</td>
+                                
+                                <td>{{i.case_date}}</td>
+                                
+                                <td><a href="{% url 'all_detail' pk=i.id %}?case_no={{i.case_no}}" class="btn btn-success"><i class="fa fa-eye"></i></a></td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="8" class="text-center bg-primary">No Cases</td>
+                            </tr>
+                           {% endfor %}
+                           {% else %}
+                           <h1>Today's Case</h1>
+                         {% for i in row %}
+                            <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td>{{i.case_no}}</td>
+                                <td>{{i.case_type}}</td>
+                                
+                                <td>{{i.case_date}}</td>
+                                
+                                <td><a href="{% url 'all_detail' pk=i.id %}?case_no={{i.case_no}}" class="btn btn-success"><i class="fa fa-eye"></i></a></td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="8" class="text-center bg-primary">No Cases</td>
+                            </tr>
+                           {% endfor %}
+                        
+                       {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}

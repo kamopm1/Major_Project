@@ -1,0 +1,43 @@
+{% include 'lawyer_header.html' %}
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header">Add Evidance</h5>
+        <div class="card-body">
+            {% if messages %}
+                {% for i in messages %}
+                    <div class="alert alert-success">{{i}}</div>
+                {% endfor %}
+            {% endif %}
+            <form  id="basicform" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <div class="form-group">
+                    <label for="inputUserName">Case No</label>
+                    <input id="inputUserName" type="text" name="case_no" required="required" placeholder="Enter the Case No"  class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="inputUserName">Lawyer Evidance Document</label>
+                    <input id="inputUserName" type="file" name="lawyer_evidance_doc" required="required"   class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName"> Other Document </label>
+                    <input id="inputUserName" type="file" name="other_doc" required="required"   class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Case Summary</label>
+                    <textarea name="case_summary" class="form-control"></textarea>  
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pl-0">
+                    </div>
+                    <div class="col-sm-6 pl-0">
+                        <p class="text-right">
+                            <button type="submit" class="btn btn-space btn-primary">Add Evidance Details</button>
+                            <button type="reset" class="btn btn-space btn-secondary">Cancel</button>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}

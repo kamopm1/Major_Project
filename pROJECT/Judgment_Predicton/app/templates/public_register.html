@@ -1,0 +1,92 @@
+{% include 'public_header.html' %}
+
+<div class="container" style="width: 60% !important; animation: fadeInUp 1s;">
+  <div class="card card-register mx-auto mt-5 shadow-lg border-0">
+    <div class="card-header bg-gradient-primary text-white text-center" style="font-size: 1.5rem; font-weight: bold;">
+      Register Here
+    </div>
+    <div class="card-body bg-light">
+      {% if messages %}
+        {% for i in messages %}
+          <div class="alert alert-success">{{ i }}</div>
+        {% endfor %}
+      {% endif %}
+      <form method="post">{% csrf_token %}
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-md-6">
+              <input type="text" name="uname" class="form-control border-info" placeholder="Username" required>
+            </div>
+            <div class="col-md-6">
+              <input type="email" name="mail" class="form-control border-infor" placeholder="Email Id" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-md-6">
+              <input type="text" name="fname" class="form-control border-info" placeholder="First Name" required autofocus>
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="lname" class="form-control border-info" placeholder="Last Name" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-md-12">
+              <input type="text" name="num" class="form-control border-info" placeholder="Phone Number" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-md-6">
+              <input type="password" name="psw" class="form-control border-info" placeholder="Password" required>
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="country" class="form-control border-info" placeholder="Country" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-md-6">
+              <input type="text" name="state" class="form-control border-info" placeholder="State" required>
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="city" class="form-control border-info" placeholder="City" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea name="addr" rows="3" class="form-control border-info" placeholder="Address"></textarea>
+        </div>
+        <input type="submit" class="btn btn-gradient-primary btn-block" value="REGISTER HERE">
+      </form>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+{% include 'footer.html' %}
+
+<style type="text/css">@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+.bg-gradient-primary {
+background: linear-gradient(90deg, #FF5733, #900C3F);
+
+}
+
+.btn-gradient-primary {
+  background: linear-gradient(90deg, #FF5733, #FFC300);
+
+  color: #fff;
+  border: none;
+}
+
+.btn-gradient-primary:hover {
+  background: linear-gradient(90deg, #FF5733, #FF8D1A);
+
+}
+</style>

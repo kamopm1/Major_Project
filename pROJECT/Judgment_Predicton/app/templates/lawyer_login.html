@@ -1,0 +1,60 @@
+{% include 'public_header.html' %}
+
+<div class="container" style="width:40% !important; padding-top:50px;">
+  <div class="card card-register mx-auto mt-5 shadow-lg border-0 animate__animated animate__fadeInDown">
+    <div class="card-header bg-gradient-primary text-white text-center" style="font-size: 1.5rem; font-weight: bold;">
+      Laywer Login
+    </div>
+    <div class="card-body bg-light">
+      {% if messages %}
+        {% for i in messages %}
+          <div class="alert alert-danger animate__animated animate__shakeX">{{ i }}</div>
+        {% endfor %}
+      {% endif %}
+      <form method="post" action="{% url 'lawyer_login' %}">{% csrf_token %}
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-md-12">
+              <input type="text" name="uname" class="form-control border-info" placeholder="Username" required autofocus>
+            </div><br><br>
+            <div class="col-md-12">
+              <input type="password" name="psw" class="form-control border-success" placeholder="Password" required>
+            </div>
+          </div>
+        </div>
+        <input type="submit" class="btn btn-gradient-primary btn-block" value="Login">
+      </form>
+    </div>
+  </div>
+</div>
+<br><br><br><br><br><br><br>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+{% include 'footer.html' %}
+
+<style type="text/css">
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+.bg-gradient-primary {
+  background: linear-gradient(90deg, #FF5733, #900C3F);
+}
+
+.btn-gradient-primary {
+  background: linear-gradient(90deg, #FF5733, #FFC300);
+  color: #fff;
+  border: none;
+}
+
+.btn-gradient-primary:hover {
+  background: linear-gradient(90deg, #FF5733, #FF8D1A);
+}
+
+.card {
+  border-radius: 15px;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+</style>

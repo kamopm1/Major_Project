@@ -1,0 +1,11 @@
+{% include 'judge_header.html' %}
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header"> Judgement</h5>
+        <div class="card-body">
+            {% for i in row %}
+               <h1 style="color: green;">Case Status: {{i.case_status}}</h1>
+               <h2>{{i.judgement}}</h2>   
+            {% endfor %}
+    </div>
+</div>

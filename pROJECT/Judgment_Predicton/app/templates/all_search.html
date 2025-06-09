@@ -1,0 +1,84 @@
+{% include 'header.html' %}
+        <form method="get" style="width:40%;margin: 0 auto;">
+        
+          <input type="text" name="city" placeholder="Enter the City" class="form-control" required="required"><br>
+   				  <input type="date" name="date" placeholder="Enter the Date" class="form-control" required="required"><br>
+   				    <select name="gender"  class="form-control" required="required">
+   				    		<option value="">Select Gender</option>
+   				    		<option value="Male">Male</option>
+   				    		<option value="Female">Female</option>
+   				    </select><br>
+   				     <select name="type"  class="form-control" required="required">
+   				    		<option value="">Select Type</option>
+   				    		<option value="FIR">FIR</option>
+   				    		<option value="Accident">Accident</option>
+   				    		<option value="Death">Death</option>
+   				    </select><br>
+         <br> <input type="submit" class="btn btn-primary btn-block" value="Search Person">
+        
+          
+        </form><br>
+        {% if request.GET.type == 'Accident' %}
+        {% for i in ids %}
+	        <div class="col-md-5 black">
+	        	<h4>Accident Area : <span class="space">{{i.accident_area}}</span></h4>
+	        	<img src="/media/{{i.image}}" width="250px" height="250px">
+	        	<h4 style="padding-top: 20px;"> Accident  Date : <span class="space">{{i.date}}</span></h4>
+	        		<h4 style="padding-top: 20px;"> Accident  Time : <span class="space">{{i.time}}</span></h4>
+	        	<h4> Person Feature: <span class="space">{{i.person_detail}}</span></h4>
+	        	<h4><u>Accident Area</u></h4>
+	        	<h3>{{i.city}} & {{i.address}} </h3>
+	        	<p><b>Gender:</b> {{i.gender}}</p>
+	        	<h3>Condition: {{i.patient_condition}} </h3>
+	        	<a href="/media/{{i.evidance}}" class="btn btn-success" target="_blank">Records</a>
+	        <a href="{% url 'send_detail' pk=i.id %}" class="btn btn-primary" target="_blank">Send Details</a>
+
+	        </div>
+	        {% empty %}
+   		{% if request.GET.search %}<h1 style="font-size: 23px;text-align: center;margin-top:100px;">No Record Found.....</h1>{% endif %}
+        {% endfor %}
+     {% elif request.GET.type == 'FIR' %}
+        {% for i in ids %}
+	        <div class="col-md-5 black">
+	        	<h4>Person Name : <span class="space">{{i.person_name}}</span></h4>
+	        	<img src="/media/{{i.image}}" width="250px" height="250px">
+	        	<h4 style="padding-top: 20px;"> FIR Date : <span class="space">{{i.date}}</span></h4>
+
+	        	<h4> Person Feature: <span class="space">{{i.person_detail}}</span></h4>
+	        	<h4><u> Address</u></h4>
+	        	<h3>{{i.city}} & {{i.address}} </h3>
+	        	<p><b>Gender:</b> {{i.gender}}</p>
+	        		<p><b>Case:</b> {{i.case}}</p>
+	        			<p><b>Punishment:</b> {{i.punishment}}</p>
+	        				<p><b>Type of Accident:</b> {{i.type_of_accident}}</p>
+	        			<a href="/media/{{i.evidance}}" class="btn btn-success" target="_blank">Records</a>
+	        			<a href="{% url 'send_detail' pk=i.id %}" class="btn btn-primary" target="_blank">Send Details</a>
+	        	
+	        </div>
+	        {% empty %}
+   		{% if request.GET.search %}<h1 style="font-size: 23px;text-align: center;margin-top:100px;">No Record Found.....</h1>{% endif %}
+        {% endfor %}
+        {% elif request.GET.type == 'Death' %}
+      
+   
+        {% for i in ids %}
+	        <div class="col-md-5 black">
+	        	<h4>Death Area : <span class="space">{{i.death_area}}</span></h4>
+	        	<img src="/media/{{i.image}}" width="250px" height="250px">
+	        	<h4 style="padding-top: 20px;"> Death  Date : <span class="space">{{i.date}}</span></h4>
+	        	<h4 style="padding-top: 20px;"> Death  Time : <span class="space">{{i.time}}</span></h4>
+	        	<h4> Person Feature: <span class="space">{{i.person_detail}}</span></h4>
+	        	<h4><u>Accident Place</u></h4>
+	        	<h3>{{i.area}} </h3>
+	        	<p><b>Gender:</b> {{i.gender}}</p>
+	        	<p><b>Type of Death:</b> {{i.type_of_death}}</p>
+	        	<p>{{i.notes}}</p>
+	       <a href="{% url 'send_detail' pk=i.id %}" class="btn btn-primary" target="_blank">Send Details</a>
+
+	        </div>
+	        {% empty %}
+   		{% if request.GET.search %}<h1 style="font-size: 23px;text-align: center;margin-top:100px;">No Record Found.....</h1>{% endif %}
+        {% endfor %}
+{% endif %}
+
+{% include 'footer.html' %}

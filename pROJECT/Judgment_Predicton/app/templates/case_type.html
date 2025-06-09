@@ -1,0 +1,28 @@
+{% include 'police_header.html' %}
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header">Choose Case Type</h5>
+        <div class="card-body">
+           
+            <form  id="basicform" method="get" enctype="multipart/form-data" action="{% url 'add_details' %}">{% csrf_token %}
+              
+                 
+                    <input  type="radio" name="case_type" value="Civil" > Civil Case
+                    <input  type="radio" name="case_type" value="Crime" > Crime
+             
+               
+                <div class="row">
+                    <div class="col-sm-6 pl-0">
+                    </div>
+                    <div class="col-sm-6 pl-0">
+                        <p class="text-right">
+                            <button type="submit" class="btn btn-space btn-primary">Next</button>
+                            <button type="reset" class="btn btn-space btn-secondary">Cancel</button>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}

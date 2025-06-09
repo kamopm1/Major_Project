@@ -1,0 +1,58 @@
+{% include 'header.html' %}
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header">Missing Person Details</h5>
+        {% if messages %}
+                {% for i in messages %}
+                    <div class="alert alert-success">{{i}}</div>
+                {% endfor %}
+            {% endif %}
+        <div class="card-body">
+            <div class="table-responsive ">
+                <table class="table table-bordered">
+                    <thead style="background: #ff407b;">
+                        <tr class="white">
+                            <th scope="col" >S.No</th>
+                            <th scope="col">Person Name</th>
+                            <th scope="col">Missed Place</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Missed Date</th>
+                            <th scope="col">Features</th>
+                            <th scope="col">Father Num</th>
+                            <th scope="col"> Photo</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in ids %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{i.person_name}}</td>
+                            <td>{{i.missed_place}}</td>
+                            <td>{{i.gender}}</td>
+                            <td>{{i.mdate}}</td>
+                            <td>{{i.features}}</td>
+                            <td>{{i.user_id.mobile}}</td>
+                            <td><a href="/media/{{i.image}}" target="_blank"><img src="/media/{{i.image}}" width="50px" height="50px"></a></td>
+                            <td>
+                                {% if i.status == 'pending' %}
+                                   <span style="color: orange;">Not Found</span>
+                                {% elif i.status == 'success' %}
+                                    <span style="color: green;">Found</span>
+                                {% endif %}
+                            </td>
+                            <td><a href="{% url 'delete' pk=i.id %}" class="btn btn-danger" onclick="return confirm('Are You Sure Want to Delete?')"><i class="far fa-trash-alt"></i></a></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center bg-primary">No Details</td>
+                        </tr>
+                       {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}

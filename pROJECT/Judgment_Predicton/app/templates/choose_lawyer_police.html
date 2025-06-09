@@ -1,0 +1,23 @@
+{% include 'police_header.html' %}
+{% load static %}
+      	<div class="container" style="background: #FFF;padding: 20px;border-radius: 20px;">
+      		<div class="row">
+      			{% for i in row %}
+	        <div class="col-md-4">
+	        	<h4>{{i.lawyer_name}}</h4>
+	        	<img src="/media/{{i.image}}" width="250px" height="250px">
+	        	<h5 style="margin-top: 10px;">Email: {{i.mail}} </h5>
+	        	<h5>Mobile: {{i.mobile}}</h5>
+	        	<h5>Qualification: {{i.qualification}} </h5>
+	        	<h5>Experience: {{i.experience}} </h5>
+	        	<h5>Specialization: {{i.specialization}} </h5>
+	        	<h3>Address</h3>
+	        	<address>{{i.address}}</address>
+	        <a href="{% url 'send_lawyer' pk=i.id %}" class="btn btn-warning"  style="margin-top:5px;">Send to lawyer</a>
+
+	        </div>
+	        {% endfor %}
+	    </div>
+	      </div>
+
+{% include 'footer.html' %}

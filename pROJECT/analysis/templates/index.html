@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Legal Assistant</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden; /* Prevent unwanted scrollbars */
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url('{{ url_for("static", filename="1.gif") }}');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      color: white;
+      padding: 10px;
+    }
+
+    .form-container {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      max-width: 800px;
+      max-height: 100%;
+      overflow-y: auto;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label,
+    textarea,
+    input {
+      font-size: 1rem;
+      color: white;
+    }
+
+    input[type="file"],
+    textarea {
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .result-container {
+      margin-top: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: left;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      font-family: monospace;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 15px;
+      }
+
+      textarea {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Analyze Case</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <label for="file">Upload Legal Document (PDF, DOCX, Image):</label>
+      <input type="file" name="file" accept=".pdf,.docx,.png,.jpg,.jpeg" required />
+
+      <label for="case_details">Extracted case details:</label>
+      <textarea name="case_details" rows="10" cols="50" required>
+{{ case_details if case_details else "" }}</textarea
+      >
+
+      <button type="submit">Analyze Case</button>
+    </form>
+
+    {% if result %}
+    <div class="result-container">
+      <h2>Analysis Result</h2>
+      <pre>{{ result }}</pre>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+  </div>
+</body>
+</html>

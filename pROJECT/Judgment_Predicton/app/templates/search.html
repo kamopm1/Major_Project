@@ -1,0 +1,51 @@
+{% include 'header.html' %}
+        <form method="post">{% csrf_token %}
+        
+          <input type="text" name="search" placeholder="Search Missed Person Based on Name..." class="form-control" required="required">
+   
+         <br> <input type="submit" class="btn btn-primary btn-block" value="Search Person">
+        
+          
+        </form><br>
+        {% if request.POST.search %}
+        {% for i in ids %}
+	        <div class="col-md-5 black">
+	        	<h4>Person Id: <span class="space">{{i.id}}</span></h4>
+	        	<h4>Person Name : <span class="space">{{i.person_name}}</span></h4>
+	        	<img src="/media/{{i.image}}" width="250px" height="250px">
+	        	<h4 style="padding-top: 20px;"> Missed  Date : <span class="space">{{i.mdate}}</span></h4>
+	        	<h4> Person Feature: <span class="space">{{i.features}}</span></h4>
+	        	<h4><u>Missed Address</u></h4>
+	        	<h3>{{i.missed_place}} </h3>
+	        	<p><b>Gender:</b> {{i.gender}}</p>
+	        	{% if i.status == 'pending' %}
+	        	<p><span style="color:orange;font-size:15px;">Not Found</span></p>
+	        	{% elif i.status == 'success' %}
+	        	<p><span style="color:green;font-size:15px;">Person Found</span></p>
+
+	        	{% endif %}
+ <a href="{% url 'send_detail' pk=i.id %}" class="btn btn-primary" target="_blank" style="margin-top:20px;">Send Details</a>
+	        </div> {% endfor %}
+	        {% else %}
+   		 {% for i in row %}
+	        <div class="col-md-5 black">
+	        	<h4>Person Id: <span class="space">{{i.id}}</span></h4>
+	        	<h4>Person Name : <span class="space">{{i.person_name}}</span></h4>
+	        	<img src="/media/{{i.image}}" width="250px" height="250px">
+	        	<h4 style="padding-top: 20px;"> Missed  Date : <span class="space">{{i.mdate}}</span></h4>
+	        	<h4> Person Feature: <span class="space">{{i.features}}</span></h4>
+	        	<h4><u>Missed Address</u></h4>
+	        	<h3>{{i.missed_place}} </h3>
+	        	<p><b>Gender:</b> {{i.gender}}</p>
+	        	{% if i.status == 'pending' %}
+	        	<p><span style="color:orange;font-size:15px;">Not Found</span></p>
+	        	{% elif i.status == 'success' %}
+	        	<p><span style="color:green;font-size:15px;">Person Found</span></p>
+
+	        	{% endif %}
+ <a href="{% url 'send_detail' pk=i.id %}" class="btn btn-primary" target="_blank" style="margin-top:20px;">Send Details</a>
+	        </div> {% endfor %}
+       
+     {% endif %}
+
+{% include 'footer.html' %}

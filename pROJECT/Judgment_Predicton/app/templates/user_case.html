@@ -1,0 +1,98 @@
+{% include 'lawyer_header.html' %}
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+  
+    <div class="card">
+        <h5 class="card-header">All Requested Cases from User</h5>
+        
+        <div class="card-body">
+            <div class="table-responsive ">
+                <table class="table table-bordered">
+                    <thead style="background: #ff407b;">
+                        <tr class="white">
+                            <th scope="col" >S.No</th>
+                            <th scope="col">User Name</th>
+                            <th scope="col">Email</th>
+                            
+                            <th scope="col">Mobile</th>
+                            <th scope="col">Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                            {% for i in row %}
+                            <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td>{{i.user_id.username}}</td>
+                                <td>{{i.user_id.mail}}</td>
+                                
+                                <td>{{i.user_id.mobile}}</td>
+                                <td>{% if i.status == 'Pending' %}
+                                    <a href="{% url 'accept' pk=i.id %}" class="btn btn-success">Accept</a>
+                                    <a href="{% url 'reject' pk=i.id %}" class="btn btn-danger">Reject</a>
+                                {% elif i.status == 'Accepted' %}
+                                <span class="badge badge-success">{{i.status}}</span>
+                                {% else %}
+                                <span class="badge badge-danger">{{i.status}}</span>
+                                {% endif %}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="8" class="text-center bg-primary">No Request</td>
+                            </tr>
+                           {% endfor %}
+                      
+                    </tbody>
+                </table>
+            </div><br><br>
+            <h5 class="card-header">All Requested Cases from Police</h5>
+            <div class="table-responsive ">
+                <table class="table table-bordered">
+                    <thead style="background: #ff407b;">
+                        <tr class="white">
+                            <th scope="col" >S.No</th>
+                            <th scope="col">Case No</th>
+                            <th scope="col">Case type</th>
+                            
+                            <th scope="col">Case Date</th>
+                            <th scope="col">Police Name</th>
+                            <th scope="col">Mobile</th>
+                            <th scope="col">Case Detail</th>
+                            <th scope="col">Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                            {% for i in detail %}
+                            <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td>{{i.case_id.case_no}}</td>
+                                <td>{{i.case_id.case_type}}</td>
+                                
+                                <td>{{i.case_id.case_date}}</td>
+                                <td>{{i.police_id.police_name}}</td>
+                                <td>{{i.police_id.mobile}}</td>
+                                <td><a href="{% url 'case_list' pk=i.case_id_id %}?case_no={{i.case_id.case_no}}" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
+                                <td>{% if i.status == 'Pending' %}
+                                    <a href="{% url 'accept_police' pk=i.id %}" class="btn btn-success">Accept</a>
+                                    <a href="{% url 'reject_police' pk=i.id %}" class="btn btn-danger">Reject</a>
+                                {% elif i.status == 'Accepted' %}
+                                <span class="badge badge-success">{{i.status}}</span>
+                                {% else %}
+                                <span class="badge badge-danger">{{i.status}}</span>
+                                {% endif %}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="8" class="text-center bg-primary">No Request</td>
+                            </tr>
+                           {% endfor %}
+                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}

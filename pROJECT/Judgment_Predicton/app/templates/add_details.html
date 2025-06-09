@@ -1,0 +1,99 @@
+{% include 'police_header.html' %}
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header">Add FIR Details</h5>
+        <div class="card-body">
+            {% if messages %}
+                {% for i in messages %}
+                    <div class="alert alert-success">{{i}}</div>
+                {% endfor %}
+            {% endif %}
+            <form  id="basicform" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <div class="form-group">
+                    <label for="inputUserName">Case No</label>
+                    <input id="inputCaseNo" type="text" name="case_no" required="required" placeholder="Enter the Name"  class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Victim Name</label>
+                    <input id="inputUserName" type="text" name="victim_name" required="required" placeholder="Enter the Name"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Suspect Name</label>
+                    <input id="inputUserName" type="text" name="suspect_name" required="required" placeholder="Enter the Name"  class="form-control">
+                </div>
+                 <div class="form-group">
+                    <label for="inputUserName">Victim Gender</label><br>
+                    <input  type="checkbox" name="victim_gender" value="Male"> Male
+                    <input  type="checkbox" name="victim_gender" value="Female"> FeMale
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Case Happen Date</label>
+                    <input id="inputUserName" type="date" name="case_date" required="required" placeholder="Enter the Name"  class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="inputUserName">Case Filed Date</label>
+                    <input id="inputUserName" type="date" name="case_filed_date" required="required" placeholder="Enter the Name"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Case Location</label>
+                    <textarea name="case_location" required="required"  class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Victim Address</label>
+                    <textarea name="victim_address" required="required"  class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Suspect Address</label>
+                    <textarea name="suspect_address" required="required"  class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName"> FIR Document</label>
+                    <input id="inputUserName" type="file" name="fir_doc" required="required"   class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName"> Evidance</label>
+                    <input id="inputUserName" type="file" name="evidance" required="required"   class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Victim Photo</label>
+                    <input id="inputUserName" type="file" name="victim_photo" required="required"   class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName"> Suspect Photo</label>
+                    <input id="inputUserName" type="file" name="suspect_photo" required="required"   class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Case Summary</label>
+                    <textarea name="case_summary" class="form-control"></textarea>  
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pl-0">
+                    </div>
+                    <div class="col-sm-6 pl-0">
+                        <p class="text-right">
+                            <button type="submit" class="btn btn-space btn-primary">Add Case Details</button>
+                            <button type="reset" class="btn btn-space btn-secondary">Cancel</button>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+// Generate a unique case number
+function generateCaseNo() {
+    const uuidPart = Math.random().toString(36).substr(2, 8).toUpperCase(); // Generate random 8-character string
+    return `CASE-${uuidPart}`;
+}
+
+// Set the generated case number in the input field
+document.addEventListener("DOMContentLoaded", () => {
+    const caseNoInput = document.getElementById("inputCaseNo");
+    if (caseNoInput) {
+        caseNoInput.value = generateCaseNo();
+    }
+});
+</script>
+{% include 'footer.html' %}

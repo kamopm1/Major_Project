@@ -1,0 +1,68 @@
+{% include 'police_header.html' %}
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header">Send to Lawyer</h5>
+        <div class="card-body">
+            {% if messages %}
+                {% for i in messages %}
+                    <div class="alert alert-success">{{i}}</div>
+                {% endfor %}
+            {% endif %}
+            <form  id="basicform" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <div class="form-group">
+                    <label for="inputUserName">Case No</label>
+                    <select name="case_id" class="form-control">
+                        <option value="">Select Case Id</option>
+                        {% for i in deatil %}
+                            <option value="{{i.id}}">{{i.case_no}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+               
+                <div class="row">
+                    <div class="col-sm-6 pl-0">
+                    </div>
+                    <div class="col-sm-6 pl-0">
+                        <p class="text-right">
+                            <button type="submit" class="btn btn-space btn-primary">Send to Lawyer</button>
+                            <button type="reset" class="btn btn-space btn-secondary">Cancel</button>
+                        </p>
+                    </div>
+                </div>
+            </form><br><br>
+
+
+             <div class="table-responsive ">
+                <table class="table table-bordered">
+                    <thead style="background: #ff407b;">
+                        <tr class="white">
+                            <th scope="col" >S.No</th>
+                            <th scope="col">Case No</th>
+                            <th scope="col">Lawyer Name</th>
+                            <th scope="col">Send Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {% for i in row %}
+                            <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td>{{i.case_id.case_no}}</td>
+                                <td>{{i.lawyer_id.lawyer_name}}</td>
+                                <td>{{i.date}}</td>
+                                
+                                
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="8" class="text-center bg-primary">No Cases</td>
+                            </tr>
+                           {% endfor %}
+                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}
